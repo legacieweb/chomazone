@@ -17,111 +17,71 @@
         }
 
         body {
-            background-color: var(--bg-deep);
+            background-color: #121212;
             color: var(--text-cream);
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         .font-serif { font-family: 'Playfair Display', serif; }
-
-        .video-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            object-fit: cover;
-            opacity: 0.3;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(197, 160, 89, 0.1);
-        }
-
-        #mobile-sidebar {
-            transition: transform 0.4s ease;
-            background: #121212;
-        }
         
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #121212; }
         ::-webkit-scrollbar-thumb { background: var(--primary-gold); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-    <video autoplay muted loop playsinline class="video-bg">
-        <source src="assets/choma.mp4" type="video/mp4">
-    </video>
-    <!-- Header -->
-    <header class="fixed top-0 w-full z-50 glass py-6 px-6 md:px-12 flex justify-between items-center">
-        <div class="flex items-center gap-4">
+<body class="min-h-screen flex">
+    <!-- Left Side: Image -->
+    <div class="hidden lg:block lg:w-1/2 relative">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" 
+             alt="Choma Zone" 
+             class="absolute inset-0 w-full h-full object-cover opacity-60">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-[#121212]"></div>
+        <div class="absolute bottom-16 left-16">
+            <a href="index.html" class="text-5xl font-serif font-black tracking-widest text-white">
+                CHOMA<span class="text-[#c5a059]">ZONE</span>
+            </a>
+            <div class="w-24 h-1 bg-[#c5a059] mt-6"></div>
+            <p class="text-[#c5a059] mt-6 uppercase text-xs tracking-[0.5em] font-light">Join Our Elite Culinary Circle</p>
+        </div>
+    </div>
+
+    <!-- Right Side: Form -->
+    <main class="w-full lg:w-1/2 flex flex-col justify-center items-center px-8 md:px-24 bg-[#121212] relative">
+        <!-- Mobile Logo -->
+        <div class="lg:hidden absolute top-12 left-12">
             <a href="index.html" class="text-2xl font-serif font-black tracking-widest text-white">
                 CHOMA<span class="text-[#c5a059]">ZONE</span>
             </a>
         </div>
-        <div class="flex items-center gap-4">
-            <nav class="hidden lg:flex space-x-8 items-center">
-                <a href="index.html" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">Home</a>
-                <a href="customer/dashboard.html" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">Reservations</a>
-            </nav>
-            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-[#c5a059]">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
-    </header>
 
-    <!-- Sidebar Overlay -->
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden"></div>
-
-    <!-- Mobile Sidebar (Right Side) -->
-    <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-80 border-l border-[#c5a059]/20 z-[70] flex flex-col translate-x-full">
-        <div class="p-10 border-b border-[#c5a059]/10 flex justify-between items-center text-white">
-            <div class="text-2xl font-serif font-black tracking-widest">
-                CHOMA<span class="text-[#c5a059]">ZONE</span>
-            </div>
-            <button onclick="toggleSidebar()" class="text-gray-500 hover:text-white">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-        <nav class="flex-grow p-10 space-y-8 font-light text-sm uppercase tracking-widest text-white">
-            <a href="index.html" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">Home</a>
-            <a href="customer/dashboard.html" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">Reservations</a>
-        </nav>
-    </aside>
-
-    <!-- Signup Form -->
-    <main class="flex-grow flex items-center justify-center px-6 pt-32 pb-20">
-        <div class="w-full max-w-md glass p-10 md:p-14 border border-[#c5a059]/10">
-            <div class="text-center mb-12">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold uppercase tracking-widest text-white">Create Profile</h2>
-                <div class="w-16 h-0.5 bg-[#c5a059] mx-auto mt-6"></div>
-                <p class="text-gray-500 mt-6 uppercase text-[10px] tracking-[0.4em] font-light">Join our elite culinary circle</p>
+        <div class="w-full max-w-md">
+            <div class="mb-12">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold uppercase tracking-widest text-white">Create Profile</h2>
+                <div class="w-16 h-0.5 bg-[#c5a059] mt-8"></div>
+                <p class="text-gray-500 mt-8 uppercase text-[10px] tracking-[0.4em] font-light">Join the pursuit of excellence</p>
             </div>
 
-            <form class="space-y-8">
+            <form class="space-y-6">
                 <div class="space-y-3">
                     <label class="block font-light text-[9px] uppercase tracking-[0.3em] text-gray-500">Full Legal Name</label>
-                    <input type="text" placeholder="NAME" class="w-full bg-white/5 border border-[#c5a059]/10 py-4 px-5 font-light text-[11px] uppercase tracking-[0.2em] text-white outline-none focus:border-[#c5a059] transition-colors">
+                    <input type="text" placeholder="NAME" class="w-full bg-white/5 border border-[#c5a059]/10 py-4 px-6 font-light text-[11px] uppercase tracking-[0.2em] text-white outline-none focus:border-[#c5a059] transition-colors">
                 </div>
                 <div class="space-y-3">
                     <label class="block font-light text-[9px] uppercase tracking-[0.3em] text-gray-500">Preferred Communication</label>
-                    <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-white/5 border border-[#c5a059]/10 py-4 px-5 font-light text-[11px] uppercase tracking-[0.2em] text-white outline-none focus:border-[#c5a059] transition-colors">
+                    <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-white/5 border border-[#c5a059]/10 py-4 px-6 font-light text-[11px] uppercase tracking-[0.2em] text-white outline-none focus:border-[#c5a059] transition-colors">
                 </div>
                 <div class="space-y-3">
                     <label class="block font-light text-[9px] uppercase tracking-[0.3em] text-gray-500">Private Access Key</label>
-                    <input type="password" placeholder="••••••••" class="w-full bg-white/5 border border-[#c5a059]/10 py-4 px-5 font-light text-[11px] uppercase tracking-[0.2em] text-white outline-none focus:border-[#c5a059] transition-colors">
+                    <input type="password" placeholder="••••••••" class="w-full bg-white/5 border border-[#c5a059]/10 py-4 px-6 font-light text-[11px] uppercase tracking-[0.2em] text-white outline-none focus:border-[#c5a059] transition-colors">
                 </div>
                 
-                <button type="submit" class="w-full py-5 border border-[#c5a059]/40 text-[#c5a059] font-serif font-bold text-xs uppercase tracking-[0.4em] hover:bg-[#c5a059] hover:text-[#121212] transition-all">
+                <div class="flex items-center gap-2 text-[10px] font-light uppercase tracking-widest text-gray-500">
+                    <input type="checkbox" class="accent-[#c5a059]" required>
+                    <span>I accept the <a href="#" class="text-[#c5a059] hover:text-white transition-colors">Terms of Excellence</a></span>
+                </div>
+
+                <button type="submit" class="w-full py-6 bg-[#c5a059] text-[#121212] font-serif font-bold text-xs uppercase tracking-[0.4em] hover:bg-white transition-all">
                     Initialize Profile
                 </button>
 
@@ -130,25 +90,11 @@
                 </p>
             </form>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="py-16 px-6 border-t border-[#c5a059]/10 text-center bg-[#0a0a0a]">
-        <div class="text-2xl font-serif font-black tracking-widest mb-6">
-            CHOMA<span class="text-[#c5a059]">ZONE</span>
+        <!-- Footer Note -->
+        <div class="absolute bottom-12 text-[8px] text-gray-600 uppercase tracking-[0.2em]">
+            &copy; 2024 CHOMA ZONE BY IYONICORP. ALL RIGHTS RESERVED.
         </div>
-        <p class="text-[#c5a059]/50 text-[10px] font-light uppercase tracking-[0.3em]">
-            EXCELLENCE IN EVERY FLAME
-        </p>
-    </footer>
-
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('mobile-sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar.classList.toggle('translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-    </script>
+    </main>
 </body>
 </html>

@@ -17,7 +17,7 @@
         }
 
         body {
-            background-color: var(--bg-deep);
+            background-color: transparent;
             color: var(--text-cream);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
@@ -31,16 +31,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             object-fit: cover;
-            opacity: 0.3;
+            opacity: 0.9;
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(197, 160, 89, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
         }
 
         .option-card {
@@ -157,13 +157,13 @@
                 <div class="space-y-6">
                     <label class="block font-light text-[10px] uppercase tracking-[0.3em] text-gray-500">Service Method</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <div onclick="selectMethod('hotel')" id="method-hotel" class="option-card p-6 text-center bg-[#1a1a1a]">
+                        <div onclick="selectMethod('hotel')" id="method-hotel" class="option-card p-6 text-center bg-white/5 backdrop-blur-md">
                             <div class="text-[10px] font-light uppercase tracking-widest text-white">Dine-In</div>
                         </div>
-                        <div onclick="selectMethod('delivery')" id="method-delivery" class="option-card p-6 text-center bg-[#1a1a1a]">
+                        <div onclick="selectMethod('delivery')" id="method-delivery" class="option-card p-6 text-center bg-white/5 backdrop-blur-md">
                             <div class="text-[10px] font-light uppercase tracking-widest text-white">Delivery</div>
                         </div>
-                        <div onclick="selectMethod('pickup')" id="method-pickup" class="option-card p-6 text-center bg-[#1a1a1a]">
+                        <div onclick="selectMethod('pickup')" id="method-pickup" class="option-card p-6 text-center bg-white/5 backdrop-blur-md">
                             <div class="text-[10px] font-light uppercase tracking-widest text-white">Collection</div>
                         </div>
                     </div>
@@ -189,13 +189,20 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-16 px-6 border-t border-[#c5a059]/10 text-center bg-[#0a0a0a]">
-        <div class="text-2xl font-serif font-black tracking-widest mb-6">
-            CHOMA<span class="text-[#c5a059]">ZONE</span>
+    <footer class="py-24 px-6 border-t border-[#c5a059]/10 text-center bg-white/5 backdrop-blur-md">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-3xl font-serif font-black tracking-widest mb-8 text-white">
+                CHOMA<span class="text-[#c5a059]">ZONE</span>
+            </div>
+            <div class="pt-12 border-t border-white/5">
+                <p class="text-[9px] text-[#c5a059]/50 uppercase tracking-[0.4em] font-light mb-4">
+                    Excellence in every flame
+                </p>
+                <p class="text-[8px] text-gray-600 uppercase tracking-[0.2em]">
+                    This is a demonstration website for <a href="https://iyonicorp.com" target="_blank" class="text-[#c5a059] hover:text-white transition-colors underline decoration-[#c5a059]/30">iyonicorp</a>. all rights reserved 2024.
+                </p>
+            </div>
         </div>
-        <p class="text-[#c5a059]/50 text-[10px] font-light uppercase tracking-[0.3em]">
-            EXCELLENCE IN EVERY FLAME
-        </p>
     </footer>
 
     <script>

@@ -17,7 +17,7 @@
         }
 
         body {
-            background-color: var(--bg-deep);
+            background-color: transparent;
             color: var(--text-cream);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
@@ -31,16 +31,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             object-fit: cover;
-            opacity: 0.3;
+            opacity: 0.9;
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(197, 160, 89, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
         }
 
         .status-badge {
@@ -64,7 +64,8 @@
 
         #mobile-sidebar {
             transition: transform 0.4s ease;
-            background: #121212;
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-blur-sm: blur(10px);
         }
 
         .section-content {
@@ -122,22 +123,22 @@
 
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="glass p-8 border-b-2 border-[#c5a059] bg-[#1a1a1a]">
+                <div class="glass p-8 border-b-2 border-[#c5a059] bg-white/5 backdrop-blur-md">
                     <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Total Reservations</div>
                     <div class="text-3xl font-serif font-bold text-white">142</div>
                     <div class="text-[9px] text-green-500 mt-3 uppercase tracking-widest">↑ 12% growth</div>
                 </div>
-                <div class="glass p-8 border-b-2 border-[#b87333] bg-[#1a1a1a]">
+                <div class="glass p-8 border-b-2 border-[#b87333] bg-white/5 backdrop-blur-md">
                     <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Daily Revenue</div>
                     <div class="text-3xl font-serif font-bold text-white">KES 2.4M</div>
                     <div class="text-[9px] text-[#c5a059] mt-3 uppercase tracking-widest">Target: 3.0M</div>
                 </div>
-                <div class="glass p-8 border-b-2 border-green-500 bg-[#1a1a1a]">
+                <div class="glass p-8 border-b-2 border-green-500 bg-white/5 backdrop-blur-md">
                     <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Active Service</div>
                     <div class="text-3xl font-serif font-bold text-white">18</div>
                     <div class="text-[9px] text-gray-500 mt-3 uppercase tracking-widest">Full Capacity</div>
                 </div>
-                <div class="glass p-8 border-b-2 border-yellow-500 bg-[#1a1a1a]">
+                <div class="glass p-8 border-b-2 border-yellow-500 bg-white/5 backdrop-blur-md">
                     <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Inventory Alert</div>
                     <div class="text-3xl font-serif font-bold text-white">03</div>
                     <div class="text-[9px] text-yellow-500 mt-3 uppercase tracking-widest">Action Required</div>
@@ -146,7 +147,7 @@
 
             <!-- Sections Container -->
             <div id="section-orders" class="section-content active">
-                <div class="glass border border-[#c5a059]/10 bg-[#1a1a1a]">
+                <div class="glass border border-[#c5a059]/10 bg-white/5 backdrop-blur-md">
                     <div class="p-8 border-b border-[#c5a059]/10 flex flex-col sm:flex-row justify-between items-center gap-6">
                         <h2 class="font-serif text-lg uppercase tracking-widest text-white">Reservation Registry</h2>
                         <div class="flex gap-4 w-full sm:w-auto">
@@ -205,12 +206,12 @@
             <div id="section-inventory" class="section-content">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="glass p-8">
-                        <h2 class="font-orbitron text-xl mb-6 uppercase tracking-tight">Resource Management</h2>
+                        <h2 class="font-serif text-xl mb-6 uppercase tracking-tight">Resource Management</h2>
                         <div class="space-y-6">
                             <div>
                                 <div class="flex justify-between mb-2">
-                                    <span class="text-[10px] font-orbitron uppercase text-gray-400">Mbavu Supply</span>
-                                    <span class="text-[10px] font-orbitron text-red-500">12% CRITICAL</span>
+                                    <span class="text-[10px] font-serif uppercase text-gray-400">Mbavu Supply</span>
+                                    <span class="text-[10px] font-serif text-red-500">12% CRITICAL</span>
                                 </div>
                                 <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
                                     <div class="bg-red-500 h-full w-[12%]"></div>
@@ -218,8 +219,8 @@
                             </div>
                             <div>
                                 <div class="flex justify-between mb-2">
-                                    <span class="text-[10px] font-orbitron uppercase text-gray-400">Nyama Stock</span>
-                                    <span class="text-[10px] font-orbitron text-green-500">85% OPTIMAL</span>
+                                    <span class="text-[10px] font-serif uppercase text-gray-400">Nyama Stock</span>
+                                    <span class="text-[10px] font-serif text-green-500">85% OPTIMAL</span>
                                 </div>
                                 <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
                                     <div class="bg-green-500 h-full w-[85%]"></div>
@@ -228,10 +229,10 @@
                         </div>
                     </div>
                     <div class="glass p-8">
-                        <h2 class="font-orbitron text-xl mb-6 uppercase tracking-tight">Inventory Actions</h2>
+                        <h2 class="font-serif text-xl mb-6 uppercase tracking-tight">Inventory Actions</h2>
                         <div class="space-y-4">
-                            <button class="w-full py-4 border border-white/10 hover:border-[#ff4d00] font-orbitron text-[10px] uppercase tracking-widest transition-all">Request Resupply</button>
-                            <button class="w-full py-4 border border-white/10 hover:border-[#00d4ff] font-orbitron text-[10px] uppercase tracking-widest transition-all">Recalibrate Sensors</button>
+                            <button class="w-full py-4 border border-white/10 hover:border-[#ff4d00] font-serif text-[10px] uppercase tracking-widest transition-all">Request Resupply</button>
+                            <button class="w-full py-4 border border-white/10 hover:border-[#00d4ff] font-serif text-[10px] uppercase tracking-widest transition-all">Recalibrate Sensors</button>
                         </div>
                     </div>
                 </div>
@@ -239,10 +240,10 @@
 
             <div id="section-users" class="section-content">
                 <div class="glass p-8">
-                    <h2 class="font-orbitron text-xl mb-6 uppercase tracking-tight">Citizen Database</h2>
+                    <h2 class="font-serif text-xl mb-6 uppercase tracking-tight">Citizen Database</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="p-6 bg-white/5 border border-white/10 hover:border-[#ff4d00] transition-all">
-                            <div class="text-xs font-orbitron uppercase text-[#ff4d00]">Nexus_01</div>
+                            <div class="text-xs font-serif uppercase text-[#ff4d00]">Nexus_01</div>
                             <div class="text-[8px] text-gray-500 uppercase tracking-widest mt-1">Level 4 Citizen | 2,450 XP</div>
                             <div class="mt-4 flex gap-2">
                                 <button class="text-[8px] uppercase tracking-widest text-[#00d4ff]">Details</button>
@@ -255,17 +256,17 @@
 
             <div id="section-analytics" class="section-content">
                 <div class="glass p-8">
-                    <h2 class="font-orbitron text-xl mb-6 uppercase tracking-tight">Neural Performance</h2>
+                    <h2 class="font-serif text-xl mb-6 uppercase tracking-tight">Neural Performance</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div class="space-y-6">
-                            <h3 class="text-xs font-orbitron uppercase text-gray-400 border-l-2 border-[#ff4d00] pl-3">Popularity Vectors</h3>
+                            <h3 class="text-xs font-serif uppercase text-gray-400 border-l-2 border-[#ff4d00] pl-3">Popularity Vectors</h3>
                             <div class="space-y-4">
                                 <div class="flex justify-between items-end">
                                     <div class="flex items-center gap-2">
                                         <div class="w-6 h-6 glass p-0.5">
                                             <img src="https://h2qshop.com/cdn/shop/articles/gas-grill-ribs-664417.jpg?v=1717425333" class="w-full h-full object-cover">
                                         </div>
-                                        <span class="text-[10px] font-orbitron uppercase">Mbavu Choma</span>
+                                        <span class="text-[10px] font-serif uppercase">Mbavu Choma</span>
                                     </div>
                                     <div class="flex items-end gap-1 h-12">
                                         <div class="w-4 bg-[#ff4d00]/20 h-1/2"></div>
@@ -278,7 +279,7 @@
                                         <div class="w-6 h-6 glass p-0.5">
                                             <img src="https://img.magnific.com/free-photo/top-view-meat-kebab-with-potatoes-grilled-vegetables-with-sauce-board_141793-4077.jpg?semt=ais_hybrid&w=740&q=80" class="w-full h-full object-cover">
                                         </div>
-                                        <span class="text-[10px] font-orbitron uppercase">Nyama Choma</span>
+                                        <span class="text-[10px] font-serif uppercase">Nyama Choma</span>
                                     </div>
                                     <div class="flex items-end gap-1 h-12">
                                         <div class="w-4 bg-[#00d4ff]/20 h-1/3"></div>
@@ -290,19 +291,19 @@
                         </div>
                         <div class="flex flex-col justify-center items-center p-8 glass border-dashed border-white/10">
                             <div class="w-32 h-32 rounded-full border-4 border-[#ff4d00] border-t-transparent animate-spin mb-4"></div>
-                            <div class="text-[10px] font-orbitron uppercase tracking-widest text-gray-500">Analyzing Market Flux...</div>
+                            <div class="text-[10px] font-serif uppercase tracking-widest text-gray-500">Analyzing Market Flux...</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Footer -->
-            <footer class="py-12 text-center">
-                <p class="text-gray-600 text-[10px] font-orbitron uppercase tracking-widest mb-2">
-                    &copy; 2026 CHOMA ZONE ADMIN CORE | CONNECTED TO MAIN_CORE_01
+            <footer class="py-12 text-center border-t border-white/5 mt-16">
+                <p class="text-[9px] text-[#c5a059]/50 uppercase tracking-[0.4em] font-light mb-4">
+                    Excellence in every flame
                 </p>
-                <p class="text-[#ff4d00] text-[10px] font-orbitron uppercase tracking-[0.2em] font-bold">
-                    THIS IS A DEMONSTRATION WEBSITE FOR IYONICORP
+                <p class="text-[8px] text-gray-600 uppercase tracking-[0.2em]">
+                    This is a demonstration website for <a href="https://iyonicorp.com" target="_blank" class="text-[#c5a059] hover:text-white transition-colors underline decoration-[#c5a059]/30">iyonicorp</a>. all rights reserved 2024.
                 </p>
             </footer>
         </div>
@@ -311,13 +312,13 @@
     <!-- Sidebar (Right Side) -->
     <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-64 glass border-l border-white/5 flex flex-col z-[80] translate-x-full lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen lg:order-2">
         <div class="p-8">
-            <a href="../index.html" class="text-2xl font-orbitron font-black tracking-tighter">
+            <a href="../index.html" class="text-2xl font-serif font-black tracking-tighter">
                 CHOMA<span class="text-[#ff4d00]">ZONE</span>
             </a>
-            <div class="mt-2 text-[8px] font-orbitron text-[#00d4ff] uppercase tracking-widest border border-[#00d4ff]/30 px-2 py-1 rounded bg-[#00d4ff]/5 inline-block">Admin_Node_01</div>
+            <div class="mt-2 text-[8px] font-serif text-[#00d4ff] uppercase tracking-widest border border-[#00d4ff]/30 px-2 py-1 rounded bg-[#00d4ff]/5 inline-block">Admin_Node_01</div>
         </div>
 
-        <nav class="flex-grow px-4 space-y-2 font-orbitron text-[10px] uppercase tracking-[0.2em]">
+        <nav class="flex-grow px-4 space-y-2 font-serif text-[10px] uppercase tracking-[0.2em]">
             <button onclick="showSection('orders')" id="nav-orders" class="w-full flex items-center justify-between gap-4 p-4 nav-link-active hover:bg-white/5 transition-colors text-left">
                 Order Central
                 <span class="w-2 h-2 bg-current rounded-full"></span>
@@ -337,7 +338,7 @@
         </nav>
 
         <div class="p-8 border-t border-white/5">
-            <a href="../index.html" class="text-[8px] font-orbitron text-gray-500 hover:text-[#ff4d00] uppercase tracking-widest transition-colors flex items-center justify-between gap-2">
+            <a href="../index.html" class="text-[8px] font-serif text-gray-500 hover:text-[#ff4d00] uppercase tracking-widest transition-colors flex items-center justify-between gap-2">
                 Disconnect Node
                 <span>➜</span>
             </a>
