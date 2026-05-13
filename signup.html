@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHOMA ZONE | AUTH_SIGNUP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ember: #ff4d00;
+            --cyber-blue: #00d4ff;
+            --bg-dark: #0a0a0a;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 25px var(--ember);
+            background-color: var(--ember);
+            color: white;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 5;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 77, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
+
+        #mobile-sidebar {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <div class="scanline"></div>
+
+    <!-- Header -->
+    <header class="w-full glass py-4 px-6 md:px-12 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-xl md:text-2xl font-orbitron font-black tracking-tighter">
+                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+            </a>
+        </div>
+        <div class="flex items-center gap-4">
+            <nav class="hidden lg:flex space-x-8 font-orbitron text-xs uppercase tracking-widest">
+                <a href="index.html" class="hover:text-[#ff4d00] transition-colors">Home</a>
+                <a href="customer/dashboard.html" class="hover:text-[#ff4d00] transition-colors">Dashboard</a>
+                <a href="admin/dashboard.html" class="text-[#00d4ff] hover:underline">Admin</a>
+            </nav>
+            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-[#ff4d00]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] hidden"></div>
+
+    <!-- Mobile Sidebar (Right Side) -->
+    <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-72 glass border-l border-white/5 z-[70] flex flex-col translate-x-full">
+        <div class="p-8 border-b border-white/5 flex justify-between items-center">
+            <div class="text-xl font-orbitron font-black tracking-tighter">
+                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+            </div>
+            <button onclick="toggleSidebar()" class="text-gray-500 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <nav class="flex-grow p-8 space-y-6 font-orbitron text-xs uppercase tracking-[0.2em]">
+            <a href="index.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Home Node</a>
+            <a href="customer/dashboard.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Dashboard</a>
+            <a href="admin/dashboard.html" onclick="toggleSidebar()" class="block text-[#00d4ff] hover:underline">Admin Access</a>
+        </nav>
+    </aside>
+
+    <!-- Signup Form -->
+    <main class="flex-grow flex items-center justify-center px-6 py-12">
+        <div class="w-full max-w-md glass p-6 md:p-8 border border-white/10">
+            <div class="text-center mb-8">
+                <h2 class="font-orbitron text-2xl md:text-3xl font-bold uppercase tracking-widest">Register Identity</h2>
+                <p class="text-gray-500 mt-2 uppercase text-[8px] tracking-[0.3em]">Initialize New Link</p>
+            </div>
+
+            <form class="space-y-6">
+                <div>
+                    <label class="block font-orbitron text-[8px] uppercase tracking-widest text-gray-400 mb-2">Full Designation</label>
+                    <input type="text" placeholder="NAME" class="w-full bg-black/40 border border-white/10 py-3 px-4 font-orbitron text-xs uppercase tracking-widest text-white outline-none focus:border-[#ff4d00]">
+                </div>
+                <div>
+                    <label class="block font-orbitron text-[8px] uppercase tracking-widest text-gray-400 mb-2">Comm Channel</label>
+                    <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-black/40 border border-white/10 py-3 px-4 font-orbitron text-xs uppercase tracking-widest text-white outline-none focus:border-[#00d4ff]">
+                </div>
+                <div>
+                    <label class="block font-orbitron text-[8px] uppercase tracking-widest text-gray-400 mb-2">New Access Key</label>
+                    <input type="password" placeholder="••••••••" class="w-full bg-black/40 border border-white/10 py-3 px-4 font-orbitron text-xs uppercase tracking-widest text-white outline-none focus:border-[#ff4d00]">
+                </div>
+                
+                <button type="submit" class="w-full py-4 border border-[#ff4d00] text-[#ff4d00] font-orbitron text-sm uppercase tracking-[0.3em] hover:bg-[#ff4d00] hover:text-white transition-all btn-glow">
+                    Initialize Profile
+                </button>
+
+                <p class="text-center text-[8px] font-orbitron uppercase tracking-widest text-gray-500 mt-6">
+                    Already Linked? <a href="login.html" class="text-[#00d4ff] hover:underline">Access Protocol</a>
+                </p>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5 text-center bg-black/80 backdrop-blur-md">
+        <div class="text-xl font-orbitron font-black mb-4">
+            CHOMA<span class="text-[#ff4d00]">ZONE</span>
+        </div>
+        <p class="text-[#ff4d00] text-[10px] font-orbitron uppercase tracking-[0.2em] font-bold">
+            THIS IS A DEMONSTRATION WEBSITE FOR IYONICORP
+        </p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

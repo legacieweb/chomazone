@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHOMA ZONE | Secure Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ember: #ff4d00;
+            --cyber-blue: #00d4ff;
+            --bg-dark: #0a0a0a;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 25px var(--ember);
+            background-color: var(--ember);
+            color: white;
+        }
+
+        .option-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-card.selected {
+            border-color: var(--ember);
+            background: rgba(255, 77, 0, 0.1);
+            box-shadow: 0 0 15px var(--ember);
+        }
+
+        #mobile-sidebar {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="glass py-4 px-6 md:px-12 flex justify-between items-center fixed top-0 w-full z-50">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-xl md:text-2xl font-orbitron font-black tracking-tighter">
+                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+            </a>
+        </div>
+        <div class="flex items-center gap-4">
+            <nav class="hidden lg:flex space-x-6 items-center">
+                <a href="index.html#menu" class="text-[10px] font-orbitron uppercase tracking-widest hover:text-[#ff4d00] transition-colors">
+                    Back to Lab
+                </a>
+                <a href="customer/dashboard.html" class="text-[10px] font-orbitron uppercase tracking-widest hover:text-[#ff4d00] transition-colors">
+                    Dashboard
+                </a>
+                <a href="login.html" class="text-[10px] font-orbitron uppercase tracking-widest hover:text-[#ff4d00] transition-colors">
+                    Login
+                </a>
+                <a href="admin/dashboard.html" class="text-[10px] font-orbitron uppercase tracking-widest text-[#00d4ff] hover:underline">
+                    Admin
+                </a>
+            </nav>
+            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-[#ff4d00]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] hidden"></div>
+
+    <!-- Mobile Sidebar (Right Side) -->
+    <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-72 glass border-l border-white/5 z-[70] flex flex-col translate-x-full">
+        <div class="p-8 border-b border-white/5 flex justify-between items-center">
+            <div class="text-xl font-orbitron font-black tracking-tighter">
+                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+            </div>
+            <button onclick="toggleSidebar()" class="text-gray-500 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <nav class="flex-grow p-8 space-y-6 font-orbitron text-xs uppercase tracking-[0.2em]">
+            <a href="index.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Home</a>
+            <a href="index.html#menu" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Back to Lab</a>
+            <a href="customer/dashboard.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">My Dashboard</a>
+            <a href="login.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Login</a>
+            <a href="admin/dashboard.html" onclick="toggleSidebar()" class="block text-[#00d4ff] hover:underline">Admin Central</a>
+        </nav>
+    </aside>
+
+    <main class="flex-grow pt-24 pb-12 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Product Info -->
+            <div class="glass p-6 md:p-8 space-y-8">
+                <div id="product-image-container" class="aspect-square bg-zinc-900/50 flex items-center justify-center relative overflow-hidden">
+                    <img id="product-image" src="" alt="" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div>
+                    <h1 id="product-name" class="text-3xl md:text-4xl font-orbitron font-black uppercase tracking-tight mb-2">PRODUCT_NAME</h1>
+                    <p id="product-desc" class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">Product description goes here.</p>
+                    <div class="flex justify-between items-center">
+                        <span id="product-price" class="text-2xl md:text-3xl font-orbitron text-[#ff4d00] font-bold">KES 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Form -->
+            <div class="glass p-6 md:p-8 space-y-8">
+                <h2 class="text-xl md:text-2xl font-orbitron font-bold uppercase tracking-widest border-l-4 border-[#00d4ff] pl-4">Configuration</h2>
+                
+                <!-- Quantity -->
+                <div class="space-y-4">
+                    <label class="block font-orbitron text-[10px] uppercase tracking-widest text-gray-400">Quantity</label>
+                    <div class="flex items-center space-x-6">
+                        <button onclick="updateQty(-1)" class="w-12 h-12 glass flex items-center justify-center text-2xl hover:bg-white/5">-</button>
+                        <span id="qty" class="text-2xl font-orbitron w-8 text-center">1</span>
+                        <button onclick="updateQty(1)" class="w-12 h-12 glass flex items-center justify-center text-2xl hover:bg-white/5">+</button>
+                    </div>
+                </div>
+
+                <!-- Delivery Type -->
+                <div class="space-y-4">
+                    <label class="block font-orbitron text-[10px] uppercase tracking-widest text-gray-400">Method</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div onclick="selectMethod('hotel')" id="method-hotel" class="option-card glass p-4 text-center">
+                            <div class="text-[10px] font-orbitron uppercase">In-House</div>
+                        </div>
+                        <div onclick="selectMethod('delivery')" id="method-delivery" class="option-card glass p-4 text-center">
+                            <div class="text-[10px] font-orbitron uppercase">Transport</div>
+                        </div>
+                        <div onclick="selectMethod('pickup')" id="method-pickup" class="option-card glass p-4 text-center">
+                            <div class="text-[10px] font-orbitron uppercase">Retrieval</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="delivery-inputs" class="hidden space-y-4">
+                    <input type="text" placeholder="DELIVERY ADDRESS" class="w-full bg-white/5 border border-white/10 p-4 font-orbitron text-sm outline-none focus:border-[#00d4ff]">
+                    <input type="text" placeholder="PHONE" class="w-full bg-white/5 border border-white/10 p-4 font-orbitron text-sm outline-none focus:border-[#00d4ff]">
+                </div>
+
+                <!-- Summary -->
+                <div class="pt-8 border-t border-white/10">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="font-orbitron text-xs uppercase text-gray-400">Total Credits</span>
+                        <span id="total-price" class="font-orbitron text-2xl text-[#ff4d00]">KES 0</span>
+                    </div>
+                    <button onclick="placeOrder()" class="w-full py-4 bg-[#ff4d00] font-orbitron text-sm uppercase tracking-widest btn-glow transition-all">
+                        Initialize Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5 text-center bg-black/80 backdrop-blur-md">
+        <div class="text-xl font-orbitron font-black mb-4">
+            CHOMA<span class="text-[#ff4d00]">ZONE</span>
+        </div>
+        <p class="text-[#ff4d00] text-[10px] font-orbitron uppercase tracking-[0.2em] font-bold">
+            THIS IS A DEMONSTRATION WEBSITE FOR IYONICORP
+        </p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mobile-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productData = {
+            'mbavu': { name: 'Mbavu Choma', price: 1500, desc: 'Slow-grilled premium ribs glazed with our signature neon-ember sauce.', img: 'https://h2qshop.com/cdn/shop/articles/gas-grill-ribs-664417.jpg?v=1717425333' },
+            'nyama': { name: 'Nyama Choma', price: 1200, desc: '1kg of perfectly seared goat meat, served with kachumbari and salt.', img: 'https://img.magnific.com/free-photo/top-view-meat-kebab-with-potatoes-grilled-vegetables-with-sauce-board_141793-4077.jpg?semt=ais_hybrid&w=740&q=80' },
+            'kuku': { name: 'Kuku Choma', price: 1200, desc: 'Full flame-grilled chicken with futuristic spice blend.', img: 'https://howtobbqright.com/wp-content/uploads/2024/05/BBQchicken640.jpg' },
+            'wali': { name: 'Wali', price: 150, desc: 'Fragrant steamed rice, perfect for pairing with choma.', img: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2022_04/1833646/instant-pot-rice-kb-square-220126.jpg' },
+            'chapati': { name: 'Chapati', price: 40, desc: 'Soft, layered, and seared to perfection.', img: 'https://swahilifood.com/wp-content/uploads/chapati.webp' },
+            'chips': { name: 'Chips', price: 200, desc: 'Crispy golden fries with ionized seasoning.', img: 'https://static.toiimg.com/thumb/54659021.cms?imgsize=275086&width=800&height=800' },
+            'ugali': { name: 'Ugali', price: 100, desc: 'Traditional high-density energy block.', img: 'https://miro.medium.com/v2/1*yC9JWW0o5r6Nt1iveuSQ8g.jpeg' }
+        };
+
+        const itemKey = urlParams.get('item');
+        const item = productData[itemKey] || productData['mbavu'];
+
+        document.getElementById('product-name').textContent = item.name;
+        document.getElementById('product-desc').textContent = item.desc;
+        document.getElementById('product-price').textContent = `KES ${item.price.toLocaleString()}`;
+        document.getElementById('product-image').src = item.img;
+
+        let qty = 1;
+        function updateQty(change) {
+            qty = Math.max(1, qty + change);
+            document.getElementById('qty').textContent = qty;
+            document.getElementById('total-price').textContent = `KES ${(item.price * qty).toLocaleString()}`;
+        }
+
+        function selectMethod(method) {
+            document.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
+            document.getElementById(`method-${method}`).classList.add('selected');
+            document.getElementById('delivery-inputs').classList.toggle('hidden', method !== 'delivery');
+        }
+
+        function placeOrder() {
+            alert('ORDER INITIALIZED!');
+            window.location.href = 'index.html';
+        }
+
+        selectMethod('hotel');
+        updateQty(0);
+    </script>
+</body>
+</html>
