@@ -7,78 +7,64 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ember: #ff4d00;
-            --cyber-blue: #00d4ff;
-            --bg-dark: #0a0a0a;
+            --primary-gold: #c5a059;
+            --accent-copper: #b87333;
+            --bg-deep: #121212;
+            --text-cream: #f5f5f5;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--bg-deep);
+            color: var(--text-cream);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
+        .font-serif { font-family: 'Playfair Display', serif; }
+
         .video-bg {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            opacity: 0.2;
             object-fit: cover;
+            opacity: 0.3;
         }
 
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-
         .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
         }
 
         .status-badge {
             font-size: 8px;
-            padding: 2px 8px;
-            border-radius: 9999px;
+            padding: 4px 12px;
+            border-radius: 0;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.2em;
+            font-weight: 700;
         }
 
-        .status-delivered { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
-        .status-processing { background: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.3); }
-        .status-dispatched { background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
-
-        .scanline {
-            width: 100%;
-            height: 100px;
-            z-index: 5;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 212, 255, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
-            opacity: 0.1;
-            position: absolute;
-            bottom: 100%;
-            animation: scanline 10s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { bottom: 100%; }
-            100% { bottom: -100px; }
-        }
+        .status-delivered { background: rgba(34, 197, 94, 0.1); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); }
+        .status-processing { background: rgba(234, 179, 8, 0.1); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.2); }
+        .status-dispatched { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
 
         .nav-link-active {
-            background: rgba(255, 77, 0, 0.1);
-            border-right: 2px solid var(--ember);
-            color: var(--ember);
+            background: rgba(197, 160, 89, 0.05);
+            border-right: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
         }
 
         #mobile-sidebar {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s ease;
+            background: #121212;
         }
 
         .section-content {
@@ -87,27 +73,29 @@
 
         .section-content.active {
             display: block;
-            animation: fadeIn 0.4s ease-out;
+            animation: fadeIn 0.5s ease-out;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-gold); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row">
     <video autoplay muted loop playsinline class="video-bg">
         <source src="../assets/choma.mp4" type="video/mp4">
     </video>
-    <div class="scanline"></div>
-
     <!-- Mobile Header -->
-    <div class="lg:hidden glass border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-[60]">
-        <a href="../index.html" class="text-xl font-orbitron font-black tracking-tighter">
-            CHOMA<span class="text-[#ff4d00]">ZONE</span>
+    <div class="lg:hidden glass border-b border-[#c5a059]/10 p-6 flex justify-between items-center sticky top-0 z-[60]">
+        <a href="../index.html" class="text-xl font-serif font-black tracking-widest text-white">
+            CHOMA<span class="text-[#c5a059]">ZONE</span>
         </a>
-        <button onclick="toggleSidebar()" class="p-2 text-[#ff4d00]">
+        <button onclick="toggleSidebar()" class="p-2 text-[#c5a059]">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
@@ -115,98 +103,98 @@
     </div>
 
     <!-- Sidebar Overlay -->
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70] hidden lg:hidden"></div>
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[70] hidden lg:hidden"></div>
 
     <!-- Main Content -->
     <main class="flex-grow p-6 lg:p-12 overflow-y-auto order-1 lg:order-1">
-        <div class="max-w-6xl mx-auto space-y-12">
+        <div class="max-w-6xl mx-auto space-y-16">
             <!-- Header Section -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                 <div>
-                    <h1 id="section-title" class="font-orbitron text-3xl lg:text-4xl font-bold uppercase tracking-tighter mb-2">Order <span class="text-[#00d4ff]">Central</span></h1>
-                    <p id="section-desc" class="text-gray-500 uppercase text-[10px] tracking-[0.4em]">Sector 7 Administration | System Status: Optimal</p>
+                    <h1 id="section-title" class="font-serif text-4xl lg:text-5xl font-bold uppercase tracking-widest text-white">Executive <span class="text-[#c5a059]">Control</span></h1>
+                    <p id="section-desc" class="text-gray-500 uppercase text-[10px] tracking-[0.4em] font-light mt-4">Corporate Management | Operations: Premium</p>
                 </div>
-                <div class="flex gap-4 w-full md:w-auto">
-                    <button class="glass flex-1 md:flex-none px-6 py-2 font-orbitron text-[10px] uppercase tracking-widest hover:border-[#ff4d00] transition-colors">System Reboot</button>
-                    <button class="bg-[#ff4d00] flex-1 md:flex-none px-6 py-2 font-orbitron text-[10px] uppercase tracking-widest hover:shadow-[0_0_15px_#ff4d00] transition-all">Emergency Lock</button>
+                <div class="flex gap-6 w-full md:w-auto">
+                    <button class="glass flex-1 md:flex-none px-8 py-3 font-light text-[10px] uppercase tracking-widest hover:border-[#c5a059] transition-colors text-white">Sync Data</button>
+                    <button class="bg-[#c5a059] text-[#121212] flex-1 md:flex-none px-8 py-3 font-serif font-bold text-[10px] uppercase tracking-widest hover:bg-[#d4af37] transition-all">Secure Portal</button>
                 </div>
             </div>
 
             <!-- Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="glass p-6 border-b-2 border-[#ff4d00]">
-                    <div class="text-gray-500 text-[10px] font-orbitron uppercase tracking-widest mb-1">Daily Throughput</div>
-                    <div class="text-3xl font-orbitron font-bold">142</div>
-                    <div class="text-[8px] text-green-500 mt-2">↑ 12% vs Yesterday</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="glass p-8 border-b-2 border-[#c5a059] bg-[#1a1a1a]">
+                    <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Total Reservations</div>
+                    <div class="text-3xl font-serif font-bold text-white">142</div>
+                    <div class="text-[9px] text-green-500 mt-3 uppercase tracking-widest">↑ 12% growth</div>
                 </div>
-                <div class="glass p-6 border-b-2 border-[#00d4ff]">
-                    <div class="text-gray-500 text-[10px] font-orbitron uppercase tracking-widest mb-1">Neural Revenue</div>
-                    <div class="text-3xl font-orbitron font-bold">KES 2.4M</div>
-                    <div class="text-[8px] text-[#00d4ff] mt-2">Target: 3.0M</div>
+                <div class="glass p-8 border-b-2 border-[#b87333] bg-[#1a1a1a]">
+                    <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Daily Revenue</div>
+                    <div class="text-3xl font-serif font-bold text-white">KES 2.4M</div>
+                    <div class="text-[9px] text-[#c5a059] mt-3 uppercase tracking-widest">Target: 3.0M</div>
                 </div>
-                <div class="glass p-6 border-b-2 border-green-500">
-                    <div class="text-gray-500 text-[10px] font-orbitron uppercase tracking-widest mb-1">Active Couriers</div>
-                    <div class="text-3xl font-orbitron font-bold">18</div>
-                    <div class="text-[8px] text-gray-500 mt-2">Sectors 1-9 covered</div>
+                <div class="glass p-8 border-b-2 border-green-500 bg-[#1a1a1a]">
+                    <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Active Service</div>
+                    <div class="text-3xl font-serif font-bold text-white">18</div>
+                    <div class="text-[9px] text-gray-500 mt-3 uppercase tracking-widest">Full Capacity</div>
                 </div>
-                <div class="glass p-6 border-b-2 border-yellow-500">
-                    <div class="text-gray-500 text-[10px] font-orbitron uppercase tracking-widest mb-1">Stock Critical</div>
-                    <div class="text-3xl font-orbitron font-bold">03</div>
-                    <div class="text-[8px] text-yellow-500 mt-2">Replenish ASAP</div>
+                <div class="glass p-8 border-b-2 border-yellow-500 bg-[#1a1a1a]">
+                    <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Inventory Alert</div>
+                    <div class="text-3xl font-serif font-bold text-white">03</div>
+                    <div class="text-[9px] text-yellow-500 mt-3 uppercase tracking-widest">Action Required</div>
                 </div>
             </div>
 
             <!-- Sections Container -->
             <div id="section-orders" class="section-content active">
-                <div class="glass overflow-hidden">
-                    <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row justify-between items-center bg-white/2 gap-4">
-                        <h2 class="font-orbitron text-sm uppercase tracking-widest">Active Data Streams (Orders)</h2>
-                        <div class="flex gap-2 w-full sm:w-auto">
-                            <input type="text" placeholder="FILTER BY ID" class="w-full sm:w-auto bg-black/40 border border-white/10 px-4 py-2 text-[8px] font-orbitron outline-none focus:border-[#ff4d00]">
+                <div class="glass border border-[#c5a059]/10 bg-[#1a1a1a]">
+                    <div class="p-8 border-b border-[#c5a059]/10 flex flex-col sm:flex-row justify-between items-center gap-6">
+                        <h2 class="font-serif text-lg uppercase tracking-widest text-white">Reservation Registry</h2>
+                        <div class="flex gap-4 w-full sm:w-auto">
+                            <input type="text" placeholder="SEARCH REGISTRY" class="w-full sm:w-64 bg-white/5 border border-[#c5a059]/10 px-5 py-3 text-[10px] font-light uppercase tracking-widest outline-none focus:border-[#c5a059] text-white">
                         </div>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left font-orbitron text-[10px] tracking-wider min-w-[600px]">
-                            <thead class="bg-white/5 uppercase text-gray-400">
+                        <table class="w-full text-left font-light text-[11px] tracking-widest min-w-[700px]">
+                            <thead class="bg-white/5 uppercase text-gray-500">
                                 <tr>
-                                    <th class="p-6">Trace ID</th>
-                                    <th class="p-6">Client</th>
-                                    <th class="p-6">Payload</th>
-                                    <th class="p-6">Credits</th>
-                                    <th class="p-6">Status</th>
-                                    <th class="p-6">Action</th>
+                                    <th class="p-8">Reference</th>
+                                    <th class="p-8">Guest</th>
+                                    <th class="p-8">Selection</th>
+                                    <th class="p-8">Value</th>
+                                    <th class="p-8">Status</th>
+                                    <th class="p-8">Manage</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-white/5">
+                            <tbody class="divide-y divide-[#c5a059]/5 text-white">
                                 <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="p-6 text-[#00d4ff]">#CZ-9825</td>
-                                    <td class="p-6 uppercase">Nexus_01</td>
-                                    <td class="p-6">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 glass p-1">
+                                    <td class="p-8 text-[#c5a059]">#CZ-9825</td>
+                                    <td class="p-8 uppercase">Alexander Nexus</td>
+                                    <td class="p-8">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 aspect-square border border-[#c5a059]/10">
                                                 <img src="https://h2qshop.com/cdn/shop/articles/gas-grill-ribs-664417.jpg?v=1717425333" class="w-full h-full object-cover">
                                             </div>
-                                            <span>1x Mbavu, 2x Wali</span>
+                                            <span class="font-serif">1x Prime Ribs</span>
                                         </div>
                                     </td>
-                                    <td class="p-6 font-bold">1,800</td>
-                                    <td class="p-6"><span class="status-badge status-dispatched">In Transit</span></td>
-                                    <td class="p-6"><button class="text-[#ff4d00] hover:underline">Intercept</button></td>
+                                    <td class="p-8 font-serif">1,800</td>
+                                    <td class="p-8"><span class="status-badge status-dispatched">En Route</span></td>
+                                    <td class="p-8"><button class="text-[#c5a059] hover:text-white transition-colors">Update</button></td>
                                 </tr>
                                 <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="p-6 text-[#00d4ff]">#CZ-9826</td>
-                                    <td class="p-6 uppercase">User_Alpha</td>
-                                    <td class="p-6">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 glass p-1">
+                                    <td class="p-8 text-[#c5a059]">#CZ-9826</td>
+                                    <td class="p-8 uppercase">Julian Vane</td>
+                                    <td class="p-8">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 aspect-square border border-[#c5a059]/10">
                                                 <img src="https://howtobbqright.com/wp-content/uploads/2024/05/BBQchicken640.jpg" class="w-full h-full object-cover">
                                             </div>
-                                            <span>3x Kuku, 3x Chips</span>
+                                            <span class="font-serif">3x Flame Chicken</span>
                                         </div>
                                     </td>
-                                    <td class="p-6 font-bold">4,200</td>
-                                    <td class="p-6"><span class="status-badge status-processing">Synthesizing</span></td>
-                                    <td class="p-6"><button class="text-[#ff4d00] hover:underline">Accelerate</button></td>
+                                    <td class="p-8 font-serif">4,200</td>
+                                    <td class="p-8"><span class="status-badge status-processing">Plating</span></td>
+                                    <td class="p-8"><button class="text-[#c5a059] hover:text-white transition-colors">Update</button></td>
                                 </tr>
                             </tbody>
                         </table>

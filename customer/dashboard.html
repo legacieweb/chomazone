@@ -7,88 +7,70 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ember: #ff4d00;
-            --cyber-blue: #00d4ff;
-            --bg-dark: #0a0a0a;
+            --primary-gold: #c5a059;
+            --accent-copper: #b87333;
+            --bg-deep: #121212;
+            --text-cream: #f5f5f5;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--bg-deep);
+            color: var(--text-cream);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
+        .font-serif { font-family: 'Playfair Display', serif; }
+
         .video-bg {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            opacity: 0.3;
             object-fit: cover;
+            opacity: 0.3;
         }
-
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
 
         .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-glow:hover {
-            box-shadow: 0 0 25px var(--ember);
-            background-color: var(--ember);
-            color: white;
-        }
-
-        .scanline {
-            width: 100%;
-            height: 100px;
-            z-index: 5;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 77, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
-            opacity: 0.1;
-            position: absolute;
-            bottom: 100%;
-            animation: scanline 8s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { bottom: 100%; }
-            100% { bottom: -100px; }
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
         }
 
         #mobile-sidebar {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s ease;
+            background: #121212;
         }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-gold); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
     <video autoplay muted loop playsinline class="video-bg">
         <source src="../assets/choma.mp4" type="video/mp4">
     </video>
-    <div class="scanline"></div>
-
     <!-- Header -->
-    <header class="w-full glass py-4 px-6 md:px-12 flex justify-between items-center sticky top-0 z-50">
-        <div class="flex items-center gap-4">
-            <a href="../index.html" class="text-xl md:text-2xl font-orbitron font-black tracking-tighter">
-                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+    <header class="fixed top-0 w-full z-50 glass py-6 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-4 text-white">
+            <a href="../index.html" class="text-2xl font-serif font-black tracking-widest">
+                CHOMA<span class="text-[#c5a059]">ZONE</span>
             </a>
         </div>
         <div class="flex items-center gap-4">
-            <nav class="hidden lg:flex space-x-8 font-orbitron text-xs uppercase tracking-widest">
-                <a href="../index.html" class="hover:text-[#ff4d00] transition-colors">Home</a>
-                <a href="../index.html#menu" class="hover:text-[#ff4d00] transition-colors">Menu</a>
-                <a href="../admin/dashboard.html" class="text-[#00d4ff] hover:underline">Admin</a>
+            <nav class="hidden lg:flex space-x-8 items-center">
+                <a href="../index.html" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">Home</a>
+                <a href="../index.html#menu" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">The Menu</a>
+                <a href="../login.html" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">Logout</a>
             </nav>
-            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-[#ff4d00]">
+            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-[#c5a059]">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -97,13 +79,13 @@
     </header>
 
     <!-- Sidebar Overlay -->
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] hidden"></div>
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden"></div>
 
     <!-- Mobile Sidebar (Right Side) -->
-    <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-72 glass border-l border-white/5 z-[70] flex flex-col translate-x-full">
-        <div class="p-8 border-b border-white/5 flex justify-between items-center">
-            <div class="text-xl font-orbitron font-black tracking-tighter">
-                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+    <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-80 border-l border-[#c5a059]/20 z-[70] flex flex-col translate-x-full">
+        <div class="p-10 border-b border-[#c5a059]/10 flex justify-between items-center text-white">
+            <div class="text-2xl font-serif font-black tracking-widest">
+                CHOMA<span class="text-[#c5a059]">ZONE</span>
             </div>
             <button onclick="toggleSidebar()" class="text-gray-500 hover:text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,79 +93,75 @@
                 </svg>
             </button>
         </div>
-        <nav class="flex-grow p-8 space-y-6 font-orbitron text-xs uppercase tracking-[0.2em]">
-            <a href="../index.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Home Node</a>
-            <a href="../index.html#menu" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Order Interface</a>
-            <a href="../login.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Auth Terminal</a>
-            <a href="../admin/dashboard.html" onclick="toggleSidebar()" class="block text-[#00d4ff] hover:underline">Admin Access</a>
+        <nav class="flex-grow p-10 space-y-8 font-light text-sm uppercase tracking-widest text-white">
+            <a href="../index.html" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">Home</a>
+            <a href="../index.html#menu" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">The Menu</a>
+            <a href="../login.html" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">Logout</a>
         </nav>
-        <div class="p-8 border-t border-white/5">
-            <p class="text-[8px] text-gray-500 font-orbitron uppercase tracking-widest">Citizen ID: NEXUS_01</p>
-        </div>
     </aside>
 
-    <main class="flex-grow p-6 md:p-12">
+    <main class="flex-grow pt-32 pb-20 px-6 md:px-12">
         <div class="max-w-7xl mx-auto">
             <!-- User Welcome -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-20 gap-10">
                 <div>
-                    <h1 class="font-orbitron text-3xl md:text-4xl font-bold uppercase tracking-tighter mb-2">Welcome, <span class="text-[#ff4d00]">Nexus_01</span></h1>
-                    <p class="text-gray-500 uppercase text-[10px] tracking-[0.4em]">Neural Link Established | Sector 7 Citizen</p>
+                    <h1 class="font-serif text-4xl md:text-5xl font-bold uppercase tracking-widest mb-4 text-white">Welcome, <span class="text-[#c5a059]">Alexander</span></h1>
+                    <p class="text-gray-500 uppercase text-[10px] tracking-[0.4em] font-light">Your private culinary dashboard</p>
                 </div>
-                <div class="glass p-6 border-r-4 border-[#ff4d00] flex flex-col items-end w-full md:w-auto">
-                    <div class="text-gray-500 text-[10px] font-orbitron uppercase tracking-widest mb-1">Loyalty Credits</div>
-                    <div class="text-3xl font-orbitron font-bold text-[#ff4d00]">2,450 XP</div>
+                <div class="glass p-10 border-r-4 border-[#c5a059] flex flex-col items-end w-full md:w-auto bg-[#1a1a1a]">
+                    <div class="text-gray-500 text-[10px] font-light uppercase tracking-widest mb-2">Member Rewards</div>
+                    <div class="text-3xl font-serif font-bold text-[#c5a059]">2,450 pts</div>
                 </div>
             </div>
 
             <!-- Dashboard Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <!-- Left Column: Current Status & History -->
-                <div class="lg:col-span-2 space-y-8">
+                <div class="lg:col-span-2 space-y-12">
                     <!-- Current Order -->
-                    <div class="glass p-6 md:p-8 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4">
-                            <span class="px-3 py-1 bg-[#00d4ff]/20 text-[#00d4ff] text-[8px] font-orbitron uppercase tracking-widest border border-[#00d4ff]/30 rounded-full animate-pulse">In Transit</span>
+                    <div class="glass p-8 md:p-12 relative overflow-hidden border border-[#c5a059]/10 bg-[#1a1a1a]">
+                        <div class="absolute top-0 right-0 p-8">
+                            <span class="px-5 py-2 bg-[#c5a059]/10 text-[#c5a059] text-[9px] font-light uppercase tracking-widest border border-[#c5a059]/20">In Preparation</span>
                         </div>
-                        <h2 class="font-orbitron text-xl mb-6 uppercase tracking-tight">Active Transmission</h2>
-                        <div class="flex flex-col sm:flex-row items-center gap-6 md:gap-8 mb-8">
-                            <div class="w-full sm:w-24 h-24 glass p-2">
+                        <h2 class="font-serif text-2xl mb-10 uppercase tracking-widest text-white">Current Selection</h2>
+                        <div class="flex flex-col sm:flex-row items-center gap-10 mb-10">
+                            <div class="w-full sm:w-32 h-32 aspect-square overflow-hidden border border-[#c5a059]/10">
                                 <img src="https://h2qshop.com/cdn/shop/articles/gas-grill-ribs-664417.jpg?v=1717425333" alt="Active Order" class="w-full h-full object-cover">
                             </div>
                             <div class="text-center sm:text-left">
-                                <h3 class="font-orbitron text-lg uppercase">Mbavu Choma</h3>
-                                <p class="text-gray-500 text-[10px] mt-1 uppercase">Order ID: #CZ-9822 | Expected: 15:45</p>
+                                <h3 class="font-serif text-2xl uppercase text-white">Prime Ribs</h3>
+                                <p class="text-gray-500 text-[10px] mt-2 uppercase tracking-widest font-light">Reservation: #CZ-9822 | Service: 19:30</p>
                             </div>
                         </div>
-                        <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
-                            <div class="bg-[#ff4d00] h-full w-3/4 shadow-[0_0_10px_#ff4d00]"></div>
+                        <div class="w-full bg-white/5 h-0.5 mb-4">
+                            <div class="bg-[#c5a059] h-full w-3/4"></div>
                         </div>
-                        <div class="flex justify-between mt-2 text-[6px] md:text-[8px] font-orbitron uppercase text-gray-500 tracking-widest">
-                            <span>Synthesizing</span>
-                            <span>Plasma Sear</span>
-                            <span class="text-[#ff4d00]">Dispatch</span>
-                            <span>Delivered</span>
+                        <div class="flex justify-between text-[8px] font-light uppercase text-gray-500 tracking-[0.2em]">
+                            <span>Confirmed</span>
+                            <span>Smoking</span>
+                            <span class="text-[#c5a059]">Plating</span>
+                            <span>Served</span>
                         </div>
                     </div>
 
                     <!-- Order History -->
-                    <div class="glass p-6 md:p-8">
-                        <h2 class="font-orbitron text-xl mb-6 uppercase tracking-tight">Deployment Log</h2>
-                        <div class="space-y-4">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/5 hover:bg-white/10 transition-colors border border-transparent hover:border-white/10 gap-4">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 glass p-1">
+                    <div class="glass p-8 md:p-12 border border-[#c5a059]/10 bg-[#1a1a1a]">
+                        <h2 class="font-serif text-2xl mb-10 uppercase tracking-widest text-white">Dining History</h2>
+                        <div class="space-y-6">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-white/5 border border-transparent hover:border-[#c5a059]/20 transition-all gap-6">
+                                <div class="flex items-center gap-6">
+                                    <div class="w-16 h-16 aspect-square overflow-hidden border border-[#c5a059]/10">
                                         <img src="https://howtobbqright.com/wp-content/uploads/2024/05/BBQchicken640.jpg" class="w-full h-full object-cover">
                                     </div>
-                                    <div class="text-[10px] font-orbitron text-gray-500">2026.05.10</div>
                                     <div>
-                                        <div class="font-orbitron text-xs md:text-sm uppercase">Kuku Choma + Wali</div>
-                                        <div class="text-[8px] text-gray-500 uppercase tracking-widest">Trace ID: #CZ-9710</div>
+                                        <div class="text-[9px] font-light text-gray-500 mb-1 uppercase tracking-widest">May 10, 2026</div>
+                                        <div class="font-serif text-lg uppercase text-white">Flame Chicken + Saffron Rice</div>
+                                        <div class="text-[9px] text-gray-500 uppercase tracking-widest font-light">Ref: #CZ-9710</div>
                                     </div>
                                 </div>
                                 <div class="text-left sm:text-right">
-                                    <div class="font-orbitron text-sm text-[#ff4d00]">KES 1,350</div>
-                                    <div class="text-[8px] text-green-500 uppercase font-bold">Successfully Received</div>
+                                    <div class="font-serif text-xl text-[#c5a059] mb-1">KES 1,350</div>
+                                    <div class="text-[8px] text-gray-400 uppercase tracking-widest">Completed</div>
                                 </div>
                             </div>
                         </div>
@@ -191,15 +169,15 @@
                 </div>
 
                 <!-- Right Column -->
-                <div class="space-y-8">
-                    <div class="glass p-6 md:p-8">
-                        <h2 class="font-orbitron text-xl mb-6 uppercase tracking-tight">Identity Node</h2>
-                        <form class="space-y-4">
-                            <div>
-                                <label class="block text-[8px] font-orbitron uppercase text-gray-500 tracking-widest mb-1">Designation</label>
-                                <input type="text" value="NEXUS_01" class="w-full bg-black/40 border border-white/10 p-3 font-orbitron text-xs focus:border-[#ff4d00] outline-none">
+                <div class="space-y-12">
+                    <div class="glass p-8 md:p-12 border border-[#c5a059]/10 bg-[#1a1a1a]">
+                        <h2 class="font-serif text-2xl mb-10 uppercase tracking-widest text-white">Profile</h2>
+                        <form class="space-y-8">
+                            <div class="space-y-3">
+                                <label class="block text-[9px] font-light uppercase text-gray-500 tracking-widest">Guest Designation</label>
+                                <input type="text" value="ALEXANDER_NEXUS" class="w-full bg-white/5 border border-[#c5a059]/10 p-4 font-light text-[11px] uppercase tracking-widest text-white focus:border-[#c5a059] outline-none transition-colors">
                             </div>
-                            <button type="button" class="w-full py-3 bg-[#ff4d00]/10 border border-[#ff4d00]/30 text-[#ff4d00] font-orbitron text-[10px] uppercase tracking-widest hover:bg-[#ff4d00] hover:text-white transition-all">Update Identity</button>
+                            <button type="button" class="w-full py-4 border border-[#c5a059]/30 text-[#c5a059] font-serif font-bold text-[10px] uppercase tracking-widest hover:bg-[#c5a059] hover:text-[#121212] transition-all">Update Profile</button>
                         </form>
                     </div>
                 </div>
@@ -208,15 +186,12 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-white/5 text-center bg-black/80 backdrop-blur-md">
-        <div class="text-xl font-orbitron font-black mb-4">
-            CHOMA<span class="text-[#ff4d00]">ZONE</span>
+    <footer class="py-16 px-6 border-t border-[#c5a059]/10 text-center bg-[#0a0a0a]">
+        <div class="text-2xl font-serif font-black tracking-widest mb-6 text-white">
+            CHOMA<span class="text-[#c5a059]">ZONE</span>
         </div>
-        <p class="text-gray-600 text-[10px] font-orbitron uppercase tracking-widest mb-2">
-            &copy; 2026 CHOMA ZONE | ALL RIGHTS RESERVED
-        </p>
-        <p class="text-[#ff4d00] text-[10px] font-orbitron uppercase tracking-[0.2em] font-bold">
-            THIS IS A DEMONSTRATION WEBSITE FOR IYONICORP
+        <p class="text-[#c5a059]/50 text-[10px] font-light uppercase tracking-[0.3em]">
+            EXCELLENCE IN EVERY FLAME
         </p>
     </footer>
 

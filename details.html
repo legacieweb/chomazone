@@ -7,78 +7,90 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ember: #ff4d00;
-            --cyber-blue: #00d4ff;
-            --bg-dark: #0a0a0a;
+            --primary-gold: #c5a059;
+            --accent-copper: #b87333;
+            --bg-deep: #121212;
+            --text-cream: #f5f5f5;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--bg-deep);
+            color: var(--text-cream);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.3;
         }
 
-        .btn-glow:hover {
-            box-shadow: 0 0 25px var(--ember);
-            background-color: var(--ember);
-            color: white;
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
         }
 
         .option-card {
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(197, 160, 89, 0.1);
         }
 
         .option-card.selected {
-            border-color: var(--ember);
-            background: rgba(255, 77, 0, 0.1);
-            box-shadow: 0 0 15px var(--ember);
+            border-color: var(--primary-gold);
+            background: rgba(197, 160, 89, 0.05);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.1);
         }
 
         #mobile-sidebar {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s ease;
+            background: #121212;
         }
 
         .hidden { display: none; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-gold); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="assets/choma.mp4" type="video/mp4">
+    </video>
     <!-- Header -->
-    <header class="glass py-4 px-6 md:px-12 flex justify-between items-center fixed top-0 w-full z-50">
+    <header class="fixed top-0 w-full z-50 glass py-6 px-6 md:px-12 flex justify-between items-center">
         <div class="flex items-center gap-4">
-            <a href="index.html" class="text-xl md:text-2xl font-orbitron font-black tracking-tighter">
-                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+            <a href="index.html" class="text-2xl font-serif font-black tracking-widest text-white">
+                CHOMA<span class="text-[#c5a059]">ZONE</span>
             </a>
         </div>
         <div class="flex items-center gap-4">
-            <nav class="hidden lg:flex space-x-6 items-center">
-                <a href="index.html#menu" class="text-[10px] font-orbitron uppercase tracking-widest hover:text-[#ff4d00] transition-colors">
-                    Back to Lab
+            <nav class="hidden lg:flex space-x-8 items-center">
+                <a href="index.html#menu" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">
+                    The Menu
                 </a>
-                <a href="customer/dashboard.html" class="text-[10px] font-orbitron uppercase tracking-widest hover:text-[#ff4d00] transition-colors">
-                    Dashboard
+                <a href="customer/dashboard.html" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">
+                    Reservations
                 </a>
-                <a href="login.html" class="text-[10px] font-orbitron uppercase tracking-widest hover:text-[#ff4d00] transition-colors">
+                <a href="login.html" class="text-[10px] font-light uppercase tracking-widest hover:text-[#c5a059] transition-colors">
                     Login
                 </a>
-                <a href="admin/dashboard.html" class="text-[10px] font-orbitron uppercase tracking-widest text-[#00d4ff] hover:underline">
-                    Admin
-                </a>
             </nav>
-            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-[#ff4d00]">
+            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-[#c5a059]">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -87,13 +99,13 @@
     </header>
 
     <!-- Sidebar Overlay -->
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] hidden"></div>
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden"></div>
 
     <!-- Mobile Sidebar (Right Side) -->
-    <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-72 glass border-l border-white/5 z-[70] flex flex-col translate-x-full">
-        <div class="p-8 border-b border-white/5 flex justify-between items-center">
-            <div class="text-xl font-orbitron font-black tracking-tighter">
-                CHOMA<span class="text-[#ff4d00]">ZONE</span>
+    <aside id="mobile-sidebar" class="fixed inset-y-0 right-0 w-80 border-l border-[#c5a059]/20 z-[70] flex flex-col translate-x-full">
+        <div class="p-10 border-b border-[#c5a059]/10 flex justify-between items-center">
+            <div class="text-2xl font-serif font-black tracking-widest">
+                CHOMA<span class="text-[#c5a059]">ZONE</span>
             </div>
             <button onclick="toggleSidebar()" class="text-gray-500 hover:text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,75 +113,75 @@
                 </svg>
             </button>
         </div>
-        <nav class="flex-grow p-8 space-y-6 font-orbitron text-xs uppercase tracking-[0.2em]">
-            <a href="index.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Home</a>
-            <a href="index.html#menu" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Back to Lab</a>
-            <a href="customer/dashboard.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">My Dashboard</a>
-            <a href="login.html" onclick="toggleSidebar()" class="block hover:text-[#ff4d00] transition-colors">Login</a>
-            <a href="admin/dashboard.html" onclick="toggleSidebar()" class="block text-[#00d4ff] hover:underline">Admin Central</a>
+        <nav class="flex-grow p-10 space-y-8 font-light text-sm uppercase tracking-widest">
+            <a href="index.html" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">Home</a>
+            <a href="index.html#menu" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">The Menu</a>
+            <a href="customer/dashboard.html" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">Reservations</a>
+            <a href="login.html" onclick="toggleSidebar()" class="block hover:text-[#c5a059] transition-colors">Login</a>
         </nav>
     </aside>
 
-    <main class="flex-grow pt-24 pb-12 px-6 md:px-12">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <main class="flex-grow pt-32 pb-20 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
             <!-- Product Info -->
-            <div class="glass p-6 md:p-8 space-y-8">
-                <div id="product-image-container" class="aspect-square bg-zinc-900/50 flex items-center justify-center relative overflow-hidden">
-                    <img id="product-image" src="" alt="" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="space-y-10">
+                <div id="product-image-container" class="aspect-[4/5] bg-zinc-900/50 relative overflow-hidden group">
+                    <img id="product-image" src="" alt="" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent"></div>
                 </div>
                 <div>
-                    <h1 id="product-name" class="text-3xl md:text-4xl font-orbitron font-black uppercase tracking-tight mb-2">PRODUCT_NAME</h1>
-                    <p id="product-desc" class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">Product description goes here.</p>
+                    <h1 id="product-name" class="text-4xl md:text-5xl font-serif font-black uppercase tracking-tight mb-4 text-white">PRODUCT_NAME</h1>
+                    <div class="w-20 h-0.5 bg-[#c5a059] mb-8"></div>
+                    <p id="product-desc" class="text-gray-400 text-base leading-relaxed mb-10 font-light">Product description goes here.</p>
                     <div class="flex justify-between items-center">
-                        <span id="product-price" class="text-2xl md:text-3xl font-orbitron text-[#ff4d00] font-bold">KES 0</span>
+                        <span id="product-price" class="text-3xl font-serif text-[#c5a059] font-bold">KES 0</span>
                     </div>
                 </div>
             </div>
 
             <!-- Order Form -->
-            <div class="glass p-6 md:p-8 space-y-8">
-                <h2 class="text-xl md:text-2xl font-orbitron font-bold uppercase tracking-widest border-l-4 border-[#00d4ff] pl-4">Configuration</h2>
+            <div class="glass p-8 md:p-12 space-y-10 border border-[#c5a059]/10">
+                <h2 class="text-xl md:text-2xl font-serif font-bold uppercase tracking-widest text-white">Refine your Experience</h2>
                 
                 <!-- Quantity -->
-                <div class="space-y-4">
-                    <label class="block font-orbitron text-[10px] uppercase tracking-widest text-gray-400">Quantity</label>
-                    <div class="flex items-center space-x-6">
-                        <button onclick="updateQty(-1)" class="w-12 h-12 glass flex items-center justify-center text-2xl hover:bg-white/5">-</button>
-                        <span id="qty" class="text-2xl font-orbitron w-8 text-center">1</span>
-                        <button onclick="updateQty(1)" class="w-12 h-12 glass flex items-center justify-center text-2xl hover:bg-white/5">+</button>
+                <div class="space-y-6">
+                    <label class="block font-light text-[10px] uppercase tracking-[0.3em] text-gray-500">Selection Quantity</label>
+                    <div class="flex items-center space-x-10">
+                        <button onclick="updateQty(-1)" class="w-14 h-14 border border-[#c5a059]/20 flex items-center justify-center text-xl hover:bg-[#c5a059] hover:text-[#121212] transition-all">-</button>
+                        <span id="qty" class="text-3xl font-serif w-10 text-center text-white">1</span>
+                        <button onclick="updateQty(1)" class="w-14 h-14 border border-[#c5a059]/20 flex items-center justify-center text-xl hover:bg-[#c5a059] hover:text-[#121212] transition-all">+</button>
                     </div>
                 </div>
 
                 <!-- Delivery Type -->
-                <div class="space-y-4">
-                    <label class="block font-orbitron text-[10px] uppercase tracking-widest text-gray-400">Method</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div onclick="selectMethod('hotel')" id="method-hotel" class="option-card glass p-4 text-center">
-                            <div class="text-[10px] font-orbitron uppercase">In-House</div>
+                <div class="space-y-6">
+                    <label class="block font-light text-[10px] uppercase tracking-[0.3em] text-gray-500">Service Method</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div onclick="selectMethod('hotel')" id="method-hotel" class="option-card p-6 text-center bg-[#1a1a1a]">
+                            <div class="text-[10px] font-light uppercase tracking-widest text-white">Dine-In</div>
                         </div>
-                        <div onclick="selectMethod('delivery')" id="method-delivery" class="option-card glass p-4 text-center">
-                            <div class="text-[10px] font-orbitron uppercase">Transport</div>
+                        <div onclick="selectMethod('delivery')" id="method-delivery" class="option-card p-6 text-center bg-[#1a1a1a]">
+                            <div class="text-[10px] font-light uppercase tracking-widest text-white">Delivery</div>
                         </div>
-                        <div onclick="selectMethod('pickup')" id="method-pickup" class="option-card glass p-4 text-center">
-                            <div class="text-[10px] font-orbitron uppercase">Retrieval</div>
+                        <div onclick="selectMethod('pickup')" id="method-pickup" class="option-card p-6 text-center bg-[#1a1a1a]">
+                            <div class="text-[10px] font-light uppercase tracking-widest text-white">Collection</div>
                         </div>
                     </div>
                 </div>
 
-                <div id="delivery-inputs" class="hidden space-y-4">
-                    <input type="text" placeholder="DELIVERY ADDRESS" class="w-full bg-white/5 border border-white/10 p-4 font-orbitron text-sm outline-none focus:border-[#00d4ff]">
-                    <input type="text" placeholder="PHONE" class="w-full bg-white/5 border border-white/10 p-4 font-orbitron text-sm outline-none focus:border-[#00d4ff]">
+                <div id="delivery-inputs" class="hidden space-y-6">
+                    <input type="text" placeholder="DELIVERY ADDRESS" class="w-full bg-white/5 border border-[#c5a059]/10 p-5 font-light text-sm uppercase tracking-widest outline-none focus:border-[#c5a059] text-white">
+                    <input type="text" placeholder="PHONE NUMBER" class="w-full bg-white/5 border border-[#c5a059]/10 p-5 font-light text-sm uppercase tracking-widest outline-none focus:border-[#c5a059] text-white">
                 </div>
 
                 <!-- Summary -->
-                <div class="pt-8 border-t border-white/10">
-                    <div class="flex justify-between items-center mb-6">
-                        <span class="font-orbitron text-xs uppercase text-gray-400">Total Credits</span>
-                        <span id="total-price" class="font-orbitron text-2xl text-[#ff4d00]">KES 0</span>
+                <div class="pt-10 border-t border-[#c5a059]/10">
+                    <div class="flex justify-between items-center mb-10">
+                        <span class="font-light text-xs uppercase tracking-widest text-gray-500">Estimated Total</span>
+                        <span id="total-price" class="font-serif text-3xl text-[#c5a059]">KES 0</span>
                     </div>
-                    <button onclick="placeOrder()" class="w-full py-4 bg-[#ff4d00] font-orbitron text-sm uppercase tracking-widest btn-glow transition-all">
-                        Initialize Order
+                    <button onclick="placeOrder()" class="w-full py-5 bg-[#c5a059] text-[#121212] font-serif font-bold text-sm uppercase tracking-[0.3em] hover:bg-[#d4af37] transition-all">
+                        Complete Reservation
                     </button>
                 </div>
             </div>
@@ -177,12 +189,12 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-white/5 text-center bg-black/80 backdrop-blur-md">
-        <div class="text-xl font-orbitron font-black mb-4">
-            CHOMA<span class="text-[#ff4d00]">ZONE</span>
+    <footer class="py-16 px-6 border-t border-[#c5a059]/10 text-center bg-[#0a0a0a]">
+        <div class="text-2xl font-serif font-black tracking-widest mb-6">
+            CHOMA<span class="text-[#c5a059]">ZONE</span>
         </div>
-        <p class="text-[#ff4d00] text-[10px] font-orbitron uppercase tracking-[0.2em] font-bold">
-            THIS IS A DEMONSTRATION WEBSITE FOR IYONICORP
+        <p class="text-[#c5a059]/50 text-[10px] font-light uppercase tracking-[0.3em]">
+            EXCELLENCE IN EVERY FLAME
         </p>
     </footer>
 
@@ -196,13 +208,13 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const productData = {
-            'mbavu': { name: 'Mbavu Choma', price: 1500, desc: 'Slow-grilled premium ribs glazed with our signature neon-ember sauce.', img: 'https://h2qshop.com/cdn/shop/articles/gas-grill-ribs-664417.jpg?v=1717425333' },
-            'nyama': { name: 'Nyama Choma', price: 1200, desc: '1kg of perfectly seared goat meat, served with kachumbari and salt.', img: 'https://img.magnific.com/free-photo/top-view-meat-kebab-with-potatoes-grilled-vegetables-with-sauce-board_141793-4077.jpg?semt=ais_hybrid&w=740&q=80' },
-            'kuku': { name: 'Kuku Choma', price: 1200, desc: 'Full flame-grilled chicken with futuristic spice blend.', img: 'https://howtobbqright.com/wp-content/uploads/2024/05/BBQchicken640.jpg' },
-            'wali': { name: 'Wali', price: 150, desc: 'Fragrant steamed rice, perfect for pairing with choma.', img: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2022_04/1833646/instant-pot-rice-kb-square-220126.jpg' },
-            'chapati': { name: 'Chapati', price: 40, desc: 'Soft, layered, and seared to perfection.', img: 'https://swahilifood.com/wp-content/uploads/chapati.webp' },
-            'chips': { name: 'Chips', price: 200, desc: 'Crispy golden fries with ionized seasoning.', img: 'https://static.toiimg.com/thumb/54659021.cms?imgsize=275086&width=800&height=800' },
-            'ugali': { name: 'Ugali', price: 100, desc: 'Traditional high-density energy block.', img: 'https://miro.medium.com/v2/1*yC9JWW0o5r6Nt1iveuSQ8g.jpeg' }
+            'mbavu': { name: 'Prime Ribs', price: 1500, desc: 'Slow-smoked for 12 hours over aged hickory and oak. Finished with a house-made peppercorn reduction.', img: 'https://h2qshop.com/cdn/shop/articles/gas-grill-ribs-664417.jpg?v=1717425333' },
+            'nyama': { name: 'Beef Brisket', price: 1200, desc: 'Tender, melt-in-your-mouth beef with a rich peppercorn crust. Sourced from grass-fed cattle.', img: 'https://img.magnific.com/free-photo/top-view-meat-kebab-with-potatoes-grilled-vegetables-with-sauce-board_141793-4077.jpg?semt=ais_hybrid&w=740&q=80' },
+            'kuku': { name: 'Flame Chicken', price: 1200, desc: 'Organic half-chicken marinated in herb-infused oil and seared to perfection over open charcoal.', img: 'https://howtobbqright.com/wp-content/uploads/2024/05/BBQchicken640.jpg' },
+            'wali': { name: 'Saffron Rice', price: 150, desc: 'Fragrant basmati rice infused with premium saffron strands and light aromatic spices.', img: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2022_04/1833646/instant-pot-rice-kb-square-220126.jpg' },
+            'chapati': { name: 'Artisan Chapati', price: 40, desc: 'Hand-stretched and seared on a traditional cast iron disc. Soft, layered, and buttery.', img: 'https://swahilifood.com/wp-content/uploads/chapati.webp' },
+            'chips': { name: 'Truffle Fries', price: 250, desc: 'Double-fried hand-cut potatoes tossed in white truffle oil and sea salt.', img: 'https://static.toiimg.com/thumb/54659021.cms?imgsize=275086&width=800&height=800' },
+            'ugali': { name: 'White Ugali', price: 100, desc: 'Traditional stone-ground maize meal, perfectly steamed for a light yet firm texture.', img: 'https://miro.medium.com/v2/1*yC9JWW0o5r6Nt1iveuSQ8g.jpeg' }
         };
 
         const itemKey = urlParams.get('item');
